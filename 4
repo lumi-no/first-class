@@ -1,0 +1,38 @@
+#include <iostream>
+#include <functional>
+
+using namespace std;
+
+int add(int a, int b)
+{
+    return a + b;
+}
+
+int multiply(int a, int b)
+{
+    return a * b;
+}
+
+int subtract(int a, int b)
+{
+    return a - b;
+}
+
+int calculate(function<int(int, int)> operation, int a, int b)
+{
+    return operation(a, b);
+}
+
+int main()
+{
+    cout << "Додавання: "
+         << calculate(add, 10, 5) << endl;
+
+    cout << "Множення: "
+         << calculate(multiply, 10, 5) << endl;
+
+    cout << "Віднімання: "
+         << calculate(subtract, 10, 5) << endl;
+
+    return 0;
+}
