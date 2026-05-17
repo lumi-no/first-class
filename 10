@@ -1,0 +1,63 @@
+#include <iostream>
+#include <vector>
+#include <functional>
+
+using namespace std;
+
+using Step = function<vector<int>(const vector<int>&)>;
+
+vector<int> pipeline(const vector<int>& data, const vector<Step>& steps)
+{
+    vector<int> result = data;
+
+    for (const Step& step : steps)
+    {
+        result = step(result);
+    }
+
+    return result;
+}
+
+int main()
+{
+    vector<int> data = {1, 2, 3, 4};
+
+    vector<Step> steps =
+    {
+        [](const vector<int>& x)
+        {
+            vector<int> result;
+
+            for (int i : x)
+            {
+                if (i % 2 == 0)
+                {
+                    result.push_back(i);
+                }
+            }
+
+            return result;
+        },
+
+        [](const vector<int>& x)
+        {
+            vector<int> result;
+
+            for (int i : x)
+            {
+                result.push_back(i * i);
+            }
+
+            return result;
+        }
+    };
+
+    vector<int> result = pipeline(data, steps);
+
+    for (int x : result)
+    {
+        cout << x << " ";
+    }
+
+    return 0;
+}
