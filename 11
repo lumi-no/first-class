@@ -1,0 +1,37 @@
+#include <iostream>
+#include <vector>
+#include <functional>
+
+using namespace std;
+
+vector<int> process(const vector<int>& data,
+                    function<int(int)> func)
+{
+    vector<int> result;
+
+    for (int x : data)
+    {
+        result.push_back(func(x));
+    }
+
+    return result;
+}
+
+int main()
+{
+    vector<int> numbers = {1, 2, 3, 4, 5};
+
+    vector<int> result =
+        process(numbers,
+        [](int x)
+        {
+            return x * 2;
+        });
+
+    for (int x : result)
+    {
+        cout << x << " ";
+    }
+
+    return 0;
+}
