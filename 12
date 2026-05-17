@@ -1,0 +1,58 @@
+#include <iostream>
+#include <vector>
+#include <functional>
+
+using namespace std;
+
+vector<double> processTransactions(
+    const vector<double>& transactions,
+    function<double(double)> operation)
+{
+    vector<double> result;
+
+    for (double value : transactions)
+    {
+        result.push_back(operation(value));
+    }
+
+    return result;
+}
+
+double applyTax(double amount)
+{
+    return amount * 1.2;
+}
+
+double applyDiscount(double amount)
+{
+    return amount * 0.9;
+}
+
+void printVector(const vector<double>& data)
+{
+    for (double value : data)
+    {
+        cout << value << " ";
+    }
+
+    cout << endl;
+}
+
+int main()
+{
+    vector<double> transactions = {100, 200, 300};
+
+    vector<double> taxed =
+        processTransactions(transactions, applyTax);
+
+    vector<double> discounted =
+        processTransactions(transactions, applyDiscount);
+
+    cout << "Після податку: ";
+    printVector(taxed);
+
+    cout << "Після знижки: ";
+    printVector(discounted);
+
+    return 0;
+}
