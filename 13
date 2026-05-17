@@ -1,0 +1,46 @@
+#include <iostream>
+#include <vector>
+#include <functional>
+
+using namespace std;
+
+int applyRules(
+    int value,
+    const vector<function<int(int)>>& rules)
+{
+    int result = value;
+
+    for (const auto& rule : rules)
+    {
+        result = rule(result);
+    }
+
+    return result;
+}
+
+int main()
+{
+    vector<function<int(int)>> rules =
+    {
+        [](int x)
+        {
+            return x + 10;
+        },
+
+        [](int x)
+        {
+            return x * 2;
+        },
+
+        [](int x)
+        {
+            return x - 5;
+        }
+    };
+
+    int result = applyRules(5, rules);
+
+    cout << result << endl;
+
+    return 0;
+}
