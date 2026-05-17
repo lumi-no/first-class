@@ -1,0 +1,39 @@
+#include <iostream>
+#include <map>
+#include <functional>
+
+using namespace std;
+
+int main()
+{
+    map<string, function<double(double, double)>> operations =
+    {
+        {"+", [](double a, double b)
+            {
+                return a + b;
+            }
+        },
+
+        {"-", [](double a, double b)
+            {
+                return a - b;
+            }
+        },
+
+        {"*", [](double a, double b)
+            {
+                return a * b;
+            }
+        },
+
+        {"/", [](double a, double b)
+            {
+                return a / b;
+            }
+        }
+    };
+
+    cout << operations["+"](2, 3) << endl;
+
+    return 0;
+}
