@@ -1,0 +1,23 @@
+Closure — це функція, яка запам’ятовує змінні із зовнішньої області видимості, може використовувати їх навіть після завершення зовнішньої функції. 
+
+#include <iostream>
+#include <functional>
+
+using namespace std;
+
+function<int(int)> makeAdder(int n)
+{
+    return [n](int x)
+    {
+        return x + n;
+    };
+}
+
+int main()
+{
+    function<int(int)> add10 = makeAdder(10);
+
+    cout << add10(5) << endl;
+
+    return 0;
+}
